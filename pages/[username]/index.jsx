@@ -18,6 +18,12 @@ export async function getServerSideProps({ query }) {
     const { username } = query;
     const userDoc = await getUserWithUsername(username);
     let posts = [];
+
+    if (!userDoc) {
+        return {
+            notFound: true
+        };
+    }
     if (userDoc) {
         const postsQuery = fireQuery(
             collection(userDoc.ref, 'posts'),
