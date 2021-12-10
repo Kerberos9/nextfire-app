@@ -9,8 +9,8 @@ export default function Navbar({}) {
     const { user, username } = useContext(UserContext);
     const router = useRouter();
     const logOut = () => {
-        signOut(auth);
         router.push('/');
+        signOut(auth);
     };
     return (
         <nav className='navbar'>
