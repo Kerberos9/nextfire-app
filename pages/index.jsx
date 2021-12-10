@@ -13,7 +13,7 @@ import { firestore, postToJSON } from '../lib/firebase';
 import PostFeed from '../components/PostFeed';
 import Loader from '../components/Loader';
 import { useState } from 'react';
-const LIMIT = 1;
+const LIMIT = 5;
 
 export async function getServerSideProps(context) {
     const postsQuery = collectionGroup(firestore, 'posts');

@@ -1,9 +1,17 @@
+import { signOut } from 'firebase/auth';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UserContext } from '../lib/context';
+import { auth } from '../lib/firebase';
 export default function Navbar({}) {
     const { user, username } = useContext(UserContext);
+    const router = useRouter();
+    const logOut = () => {
+        signOut(auth);
+        router.push('/');
+    };
     return (
         <nav className='navbar'>
             <ul>
@@ -22,8 +30,16 @@ export default function Navbar({}) {
                             </Link>
                         </li>
                         <li>
+                            <button className='btn-grey' onClick={logOut}>
+                                Logout
+                            </button>
+                        </li>
+                        <li>
                             <Link href={`/${username}`} passHref>
-                                <img src={user?.photoURL} />
+                                <img
+                                    src={user?.photoURL}
+                                    alt='User profile picture'
+                                />
                             </Link>
                         </li>
                     </>
